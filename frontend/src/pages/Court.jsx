@@ -28,20 +28,16 @@ export default function Court() {
 
   const availableCourts = selectedGameData?.courts || [];
 
-  // ✅ slots now ARRAY (no Object.keys)
   const slots = selectedCourt?.slots || [];
 
-  // ✅ formatted date
   const formattedDate = date?.toISOString().split("T")[0];
 
-  // 🔥 bookings API
   const { bookings = [] } = useBookings({
     game: selectedSport,
     courtId: selectedCourt?.courtId,
     date: formattedDate,
   });
 
-  // 🔥 slot → email map
   const bookingMap = {};
   bookings.forEach((b) => {
     bookingMap[b.slot] = b.user?.email;
@@ -60,6 +56,22 @@ export default function Court() {
     setOpenModal(false);
   }
 
+  // ✅ FIX: image mapping (no dynamic string path)
+  const images = {
+    badminton: "/badminton.jpg",
+    tennis: "/tennis.jpg",
+    football: "/football.jpg",
+    cricket: "/cricket.jpg",
+  };
+
+  // ✅ FIX: preload images once
+  useEffect(() => {
+    Object.values(images).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   if (isLoading) return <p className="text-white">Loading...</p>;
 
   return (
@@ -68,8 +80,9 @@ export default function Court() {
         {/* LEFT IMAGE */}
         <div className="h-80 md:h-screen">
           <img
-            src={`./../../${selectedSport}.jpg`}
+            src={images[selectedSport]}
             alt="sport"
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
@@ -120,18 +133,17 @@ export default function Court() {
 
           {/* DATE */}
           <div className="flex flex-col gap-2 w-full">
-            {" "}
-            <h2 className="text-sm text-white">Select Date</h2>{" "}
+            <h2 className="text-sm text-white">Select Date</h2>
             <DatePicker
               selected={date}
               onChange={(d) => setDate(d)}
               minDate={new Date()}
               className="w-full bg-gray-800 border border-gray-700 p-3 rounded-xl"
               placeholderText="Pick a date"
-            />{" "}
+            />
           </div>
 
-          {/* 🔥 SLOT SELECT (FINAL) */}
+          {/* SLOT */}
           <div>
             <h2 className="mb-2">Select Time Slot</h2>
 
