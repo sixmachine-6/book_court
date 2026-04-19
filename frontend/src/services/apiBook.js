@@ -5,13 +5,9 @@ const API_URL = "https://book-court.onrender.com/api/v1/courts";
 export async function getCourts() {
   try {
     const res = await axios.get(API_URL);
-
-    console.log("Courts data:", res.data);
-
     return res.data.data; // assuming { status, data: [...] }
   } catch (err) {
     const message = err.response.data;
-    console.error("Courts error:", message);
     throw new Error(message);
   }
 }
@@ -19,7 +15,6 @@ export async function getCourts() {
 export async function bookCourt({ game, courtNumber, date, slot }) {
   try {
     const token = localStorage.getItem("token");
-    console.log("token", token);
     const res = await axios.post(
       API_URL,
       {
@@ -37,7 +32,6 @@ export async function bookCourt({ game, courtNumber, date, slot }) {
 
     return res.data;
   } catch (err) {
-    console.log(err.response);
     throw new Error(err.response.data.message);
   }
 }
