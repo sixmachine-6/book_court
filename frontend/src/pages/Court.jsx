@@ -60,8 +60,8 @@ export default function Court() {
   const images = {
     badminton: "/badminton.jpg",
     tennis: "/tennis.jpg",
-    football: "/football.jpg",
-    cricket: "/cricket.jpg",
+    volleyball: "/volleyball.jpg",
+    basketball: "/basketball.jpg",
   };
 
   // ✅ FIX: preload images once
