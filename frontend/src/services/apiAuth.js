@@ -16,6 +16,11 @@ export async function signup(email) {
 
 // LOGIN
 export async function login(email) {
-  const res = await axios.post(`${API_URL}/login`, { email });
-  return res.data;
+  try {
+    console.log("Sending email:", email);
+    const res = await axios.post(`${API_URL}/login`, { email });
+    return res.data;
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
 }

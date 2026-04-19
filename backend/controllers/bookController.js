@@ -24,10 +24,19 @@ exports.bookCourt = async (req, res) => {
   try {
     const { game, courtNumber, date, slot } = req.body;
 
-    // 🔐 user from JWT
     const userId = req.user.id;
 
-    // 🔍 Check if already booked
+    // 🚫 Check if user already has a booking
+    const userExisting = await Booking.findOne({ user: userId });
+
+    if (userExisting) {
+      return res.status(400).json({
+        status: "fail",
+        message: "User has already booked a slot",
+      });
+    }
+
+    // 🔍 Check if slot already booked
     const existing = await Booking.findOne({
       game,
       courtId: courtNumber,
@@ -56,7 +65,6 @@ exports.bookCourt = async (req, res) => {
       data: booking,
     });
   } catch (err) {
-    // 🔥 Handle duplicate key error (race condition)
     if (err.code === 11000) {
       return res.status(400).json({
         status: "fail",
