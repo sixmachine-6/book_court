@@ -7,10 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://elaborate-salamander-638219.netlify.app",
-    ],
+    origin: ["http://localhost:5173", "https://bookourcourt.netlify.app"],
     methods: ["GET", "POST"],
     credentials: true,
   }),

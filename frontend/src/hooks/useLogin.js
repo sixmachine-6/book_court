@@ -18,8 +18,7 @@ export function useLogin() {
     },
 
     onError: (err) => {
-      console.error(err);
-      toast.error("Login failed ❌");
+      toast.error(err.message);
     },
   });
 
