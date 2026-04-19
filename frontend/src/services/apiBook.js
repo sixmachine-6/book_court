@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/api/v1/courts";
+const API_URL = "https://book-court.onrender.com/api/v1/courts";
 
 export async function getCourts() {
   try {
