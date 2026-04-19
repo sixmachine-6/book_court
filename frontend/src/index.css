@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  /* ========== BASE COLORS ========== */
+  --bg-primary: #0b0f14;
+  --bg-secondary: #111827;
+  --bg-tertiary: #1f2937;
+
+  /* ========== TEXT COLORS ========== */
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* ========== ACCENT COLORS ========== */
+  --color-primary: #6366f1; /* Indigo */
+  --color-primary-hover: #4f46e5;
+  --color-secondary: #22d3ee; /* Cyan */
+  --color-accent: #f472b6; /* Pink */
+
+  /* ========== SURFACE & BORDER ========== */
+  --border-color: #374151;
+  --card-bg: #111827;
+  --card-hover: #1f2937;
+
+  /* ========== STATUS COLORS ========== */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  /* ========== SHADOW (SUBTLE GLOW) ========== */
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.25);
+}
+
+/* Optional: smooth transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Body styling */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
